@@ -1,0 +1,72 @@
+{
+  "name": "damping-tween",
+  "version": "0.0.0",
+  "author": "Yomotsu",
+  "license": "MIT",
+  "main": "dist/damping-tween.js",
+  "jsnext:main": "dist/damping-tween.module.js",
+  "module": "dist/damping-tween.module.js",
+  "types": "dist/index.d.ts",
+  "repository": "yomotsu/damping-tween",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.8.1",
+    "@typescript-eslint/parser": "^4.8.1",
+    "downlevel-dts": "^0.7.0",
+    "eslint": "^7.13.0",
+    "eslint-config-mdcs": "^5.0.0",
+    "rollup": "^2.33.3",
+    "rollup-plugin-typescript2": "^0.29.0",
+    "terser": "^5.4.0",
+    "typescript": "^4.0.5"
+  },
+  "scripts": {
+    "dev": "rollup --config --watch",
+    "build": "rollup --config && terser dist/damping-tween.js -o dist/damping-tween.min.js --comments '/^!/' && downlevel-dts . .",
+    "lint": "eslint src --ext ts"
+  },
+  "browserslist": [
+    "last 2 versions",
+    "ie >= 11"
+  ],
+  "eslintConfig": {
+    "root": true,
+    "parser": "@typescript-eslint/parser",
+    "extends": "mdcs",
+    "plugins": [
+      "@typescript-eslint"
+    ],
+    "rules": {
+      "no-unused-vars": 0,
+      "@typescript-eslint/no-unused-vars": 1,
+      "indent": 0,
+      "@typescript-eslint/indent": [
+        "error",
+        "tab",
+        {
+          "SwitchCase": 1,
+          "flatTernaryExpressions": true
+        }
+      ],
+      "no-multi-spaces": [
+        0
+      ],
+      "key-spacing": [
+        0
+      ]
+    }
+  },
+  "eslintIgnore": [
+    "/dist/",
+    "/node_modules/"
+  ],
+  "typesVersions": {
+    "<=3.4.0-0": {
+      "*": [
+        "./"
+      ]
+    }
+  },
+  "keywords": [
+    "drag"
+  ]
+}
