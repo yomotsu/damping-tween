@@ -32,6 +32,9 @@
 	    get values() {
 	        return Object.assign({}, this._currentValues);
 	    }
+	    get endValues() {
+	        return Object.assign({}, this._endValues);
+	    }
 	    setValues(values, immediate = false) {
 	        this._keys.forEach((key) => this.setValue(key, values[key], immediate));
 	    }
