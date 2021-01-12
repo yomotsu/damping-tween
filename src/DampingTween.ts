@@ -26,8 +26,8 @@ export class DampingTween {
 		}, {} as Values );
 
 		this._keys = Object.keys( _values );
-		this._currentValues = {..._values };
-		this._endValues = {..._values };
+		this._currentValues = { ..._values };
+		this._endValues = { ..._values };
 		this._deltaValues = this._keys.reduce( ( __values, key ) => {
 
 			__values[ key ] = 0;
@@ -40,6 +40,12 @@ export class DampingTween {
 	get values(): Values {
 
 		return { ...this._currentValues };
+
+	}
+
+	get endValues(): Values {
+
+		return { ...this._endValues };
 
 	}
 
