@@ -7,16 +7,18 @@ interface Values {
 export class DampingTween {
 
 	active = false;
-	dampingFactor = 0.1;
+	dampingFactor: number;
 
 	private _keys: string[];
 	private _currentValues: Values;
 	private _endValues: Values;
 	private _deltaValues: Values;
 
-	constructor( values: Values ) {
+	constructor( values: Values | number, dampingFactor = 0.1 ) {
 
-		const _values = Object.keys( values ).reduce( ( __values, key ) => {
+		this.dampingFactor = dampingFactor;
+
+		const _values = isNumber( values ) ? { value: values } : Object.keys( values ).reduce( ( __values, key ) => {
 
 			// remove value other than number
 			if ( ! isNumber( values[ key ] ) ) return __values;
@@ -73,6 +75,30 @@ export class DampingTween {
 
 	}
 
+	get value(): number {
+
+		return this._currentValues[ this._keys[ 0 ] ];
+
+	}
+
+	get endValue(): number {
+
+		return this._endValues[ this._keys[ 0 ] ];
+
+	}
+
+	set value( value: number ) {
+
+		this.setValue( this._keys[ 0 ], value );
+
+	}
+
+	set endValue( value: number ) {
+
+		this.setValue( this._keys[ 0 ], value );
+
+	}
+
 	stop(): void {
 
 		this.setValues( this._currentValues, true );
@@ -114,7 +140,7 @@ export class DampingTween {
 
 }
 
-function isNumber( value: number ): boolean {
+function isNumber( value: any ): value is Number {
 
 	return ( typeof value === 'number' ) && ( isFinite( value ) );
 
