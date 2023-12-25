@@ -11,10 +11,11 @@ export declare class DampingTween {
     constructor(values: Values | number, dampingFactor?: number);
     readonly values: Values;
     readonly endValues: Values;
+    readonly value: number;
+    readonly endValue: number;
     setValues(values: Values, immediate?: boolean): void;
-    setValue(key: string, value: number, immediate?: boolean): void;
-    value: number;
-    endValue: number;
+    setValue(value: number, immediate?: boolean): void;
+    setValueByKey(key: string, value: number, immediate?: boolean): void;
     stop(): void;
     update(delta: number): boolean;
 }
