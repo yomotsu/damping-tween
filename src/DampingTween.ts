@@ -51,13 +51,31 @@ export class DampingTween {
 
 	}
 
-	setValues( values: Values, immediate = false ): void {
+	get value(): number {
 
-		this._keys.forEach( ( key ) => this.setValue( key, values[ key ], immediate ) );
+		return this._currentValues[ this._keys[ 0 ] ];
 
 	}
 
-	setValue( key: string, value: number, immediate = false ): void {
+	get endValue(): number {
+
+		return this._endValues[ this._keys[ 0 ] ];
+
+	}
+
+	setValues( values: Values, immediate = false ): void {
+
+		this._keys.forEach( ( key ) => this.setValueByKey( key, values[ key ], immediate ) );
+
+	}
+
+	setValue( value: number, immediate = false ): void {
+
+		this.setValueByKey( this._keys[ 0 ], value, immediate );
+
+	}
+
+	setValueByKey( key: string, value: number, immediate = false ): void {
 
 		if ( ! isNumber( this._endValues[ key ] ) ) return;
 		if ( approxEquals( value, this._endValues[ key ] ) ) return;
@@ -72,30 +90,6 @@ export class DampingTween {
 		}
 
 		this.active = true;
-
-	}
-
-	get value(): number {
-
-		return this._currentValues[ this._keys[ 0 ] ];
-
-	}
-
-	get endValue(): number {
-
-		return this._endValues[ this._keys[ 0 ] ];
-
-	}
-
-	set value( value: number ) {
-
-		this.setValue( this._keys[ 0 ], value );
-
-	}
-
-	set endValue( value: number ) {
-
-		this.setValue( this._keys[ 0 ], value );
 
 	}
 
