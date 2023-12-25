@@ -6,10 +6,10 @@
  */
 const FPS_60 = 1 / 0.016;
 class DampingTween {
-    constructor(values) {
+    constructor(values, dampingFactor = 0.1) {
         this.active = false;
-        this.dampingFactor = 0.1;
-        const _values = Object.keys(values).reduce((__values, key) => {
+        this.dampingFactor = dampingFactor;
+        const _values = isNumber(values) ? { value: values } : Object.keys(values).reduce((__values, key) => {
             if (!isNumber(values[key]))
                 return __values;
             __values[key] = values[key];
@@ -44,6 +44,18 @@ class DampingTween {
             this._currentValues[key] = value;
         }
         this.active = true;
+    }
+    get value() {
+        return this._currentValues[this._keys[0]];
+    }
+    get endValue() {
+        return this._endValues[this._keys[0]];
+    }
+    set value(value) {
+        this.setValue(this._keys[0], value);
+    }
+    set endValue(value) {
+        this.setValue(this._keys[0], value);
     }
     stop() {
         this.setValues(this._currentValues, true);
